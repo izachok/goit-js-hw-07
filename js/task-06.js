@@ -1,18 +1,17 @@
-// Напиши скрипт, который бы при потере фокуса на инпуте, проверял его содержимое на правильное количество символов.
-
 const inputRef = document.querySelector('#validation-input');
+const requiredLength = Number(
+  document.querySelector('#validation-input').dataset.length,
+);
 
-inputRef.addEventListener('blur', event => {
-  const requiredLength = Number(event.currentTarget.dataset.length);
+inputRef.addEventListener('blur', checkEnteredValue);
 
-  if (
-    !isNaN(requiredLength) &&
-    event.currentTarget.value.length === requiredLength
-  ) {
-    event.currentTarget.classList.add('valid');
-    event.currentTarget.classList.remove('invalid');
+function checkEnteredValue(event) {
+  const target = event.currentTarget;
+  if (!isNaN(requiredLength) && target.value.length === requiredLength) {
+    target.classList.add('valid');
+    target.classList.remove('invalid');
   } else {
-    event.currentTarget.classList.add('invalid');
-    event.currentTarget.classList.remove('valid');
+    target.classList.add('invalid');
+    target.classList.remove('valid');
   }
-});
+}
